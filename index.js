@@ -35,6 +35,17 @@ app.get('/api/persons', (request, response) => {
     response.json(phonebook)
 })
 
+app.get('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const person = phonebook.find(p => p.id === id)
+    if (!person) {
+        response.status(404).end()
+    }
+    else {
+        response.json(person)
+    }
+})
+
 
 const PORT = 3001
 
