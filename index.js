@@ -38,7 +38,7 @@ let phonebook =  [
 
 ]
 
-const PORT = 3001
+
 
 const generateId = () => {
     const maxId = phonebook.length > 0 
@@ -97,6 +97,8 @@ app.post('/api/persons', (request, response) => {
 
 })
 
+
+const PORT = process.env.PORT || 3001
 
 app.listen(PORT, ()=>{
     console.log(`Server running on port ${PORT}`)
