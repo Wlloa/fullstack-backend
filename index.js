@@ -8,6 +8,7 @@ app.use(express.json())
 app.use(morgan('tiny'))
 app.use(cors())
 
+
 morgan.token('body', function getBody (req){
     return JSON.stringify(req.body)
 })
