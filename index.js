@@ -40,8 +40,6 @@ let phonebook =  [
 
 ]
 
-
-
 const generateId = () => {
     const maxId = phonebook.length > 0 
     ? Math.max(...phonebook.map(p => p.id)) : 0
