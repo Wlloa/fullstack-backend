@@ -9,6 +9,9 @@ app.use(express.static('build'))
 app.use(morgan('tiny'))
 app.use(cors())
 
+require('dotenv').config()
+
+const Contact = require('./models/contact')
 
 morgan.token('body', function getBody (req){
     return JSON.stringify(req.body)
@@ -52,18 +55,18 @@ app.get('/info', (request, response) => {
 })
 
 app.get('/api/persons', (request, response) => {
-    response.json(phonebook)
+    Contact.find({}).then(contacts => {
+        response.json(contacts)
+    })
 })
 
 app.get('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    const person = phonebook.find(p => p.id === id)
-    if (!person) {
+    Contact.findById(request.params.id).then(contact => {
+        response.json(contact)
+    })
+    .catch(error => {
         response.status(404).end()
-    }
-    else {
-        response.json(person)
-    }
+    })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
