@@ -83,20 +83,20 @@ app.post('/api/persons', (request, response) => {
         })
     }
 
-    if (phonebook.find(p => p.name === body.name)) {
-        return response.status(404).json({
-            error: "name must be unique"
-        })
-    }
+    // if (phonebook.find(p => p.name === body.name)) {
+    //     return response.status(404).json({
+    //         error: "name must be unique"
+    //     })
+    // }
 
-    const contact = {
-        id: generateId(),
+    const contact = new Contact({
         name: body.name,
         number: body.number
-    }
+    })
 
-    phonebook = phonebook.concat(contact)
-    response.json(contact)
+    contact.save().then( createdContact => {
+        response.json(createdContact)
+    })
 
 })
 
