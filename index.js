@@ -9,7 +9,7 @@ app.use(express.static('build'))
 app.use(morgan('tiny'))
 app.use(cors())
 
-//require('dotenv').config()
+require('dotenv').config()
 
 const Contact = require('./models/contact')
 
