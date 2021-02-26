@@ -76,6 +76,15 @@ app.delete('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
+app.put('/api/persons/:id', (request, response, next) => {
+    const contact = request.body
+    Contact.findByIdAndUpdate(request.params.id, contact, {new:true})
+    .then( updatedContact => {
+        response.json(updatedContact)
+    })
+    .catch(error => next(error))
+})
+
 app.post('/api/persons', (request, response) => {
     const body = request.body
     if(!body.name || !body.number) {
@@ -83,12 +92,6 @@ app.post('/api/persons', (request, response) => {
             error: 'missing contact name or number'
         })
     }
-
-    // if (phonebook.find(p => p.name === body.name)) {
-    //     return response.status(404).json({
-    //         error: "name must be unique"
-    //     })
-    // }
 
     const contact = new Contact({
         name: body.name,
