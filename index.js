@@ -51,7 +51,10 @@ const generateId = () => {
 }
 
 app.get('/info', (request, response) => {
-    response.send(`Phonebook has info for ${phonebook.length} people <p>${new Date()}<p/>`)
+    Contact.find({})
+    .then( result => {
+        response.send(`Phonebook has info for ${result.length} people <p>${new Date()}<p/>`)
+    })
 })
 
 app.get('/api/persons', (request, response, next) => {
