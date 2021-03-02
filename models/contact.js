@@ -12,10 +12,13 @@ mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser:true, useUnifiedTopol
 const contactSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        minlength: 3,
         unique: true
     },
-    number: String,
+    number: {
+        type: String,
+        minlength: 8
+    },
 })
 
 contactSchema.plugin(uniqueValidator)
